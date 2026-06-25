@@ -1,0 +1,94 @@
+:root {
+  --color-bg: #141414;
+  --color-card: #1f1f1f;
+  --color-card-border: #2a2a2a;
+  --color-pill: #2f2f2f;
+  --color-pill-date: #565656;
+  --color-primary: #773cff;
+  --color-text: #f9f9f9;
+  --color-muted: #999999;
+  --font-app: Lato, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading-1: 700 32px/1.1 var(--font-app);
+  --font-heading-2: 700 24px/1.1 var(--font-app);
+  --font-heading-3: 700 20px/1.1 var(--font-app);
+  --font-heading-4: 700 16px/1.1 var(--font-app);
+  --font-body-1: 400 16px/1.25 var(--font-app);
+  --font-body-2: 400 14px/1.25 var(--font-app);
+  --font-body-3: 400 12px/1.25 var(--font-app);
+}
+
+.app-shell {
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  background: #000;
+  color: var(--color-text);
+  font-family: var(--font-app);
+}
+
+.app-panel {
+  width: 100%;
+  max-width: 400px;
+  min-height: 100svh;
+  padding: 24px 16px 40px;
+  background: var(--color-bg);
+  overflow-x: hidden;
+}
+
+.page-transition {
+  min-height: 100%;
+}
+
+.page-transition-forward {
+  animation: slide-in-from-right 220ms ease-out both;
+}
+
+.page-transition-back {
+  animation: slide-in-from-left 220ms ease-out both;
+}
+
+@keyframes slide-in-from-right {
+  from {
+    opacity: 0.75;
+    transform: translateX(36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-left {
+  from {
+    opacity: 0.75;
+    transform: translateX(-36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-forward,
+  .page-transition-back {
+    animation: none;
+  }
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(177, 94, 255, 0.85);
+  outline-offset: 4px;
+}
+
+@media (max-width: 360px) {
+  .app-panel {
+    padding-inline: 12px;
+  }
+}

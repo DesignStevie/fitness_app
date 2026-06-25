@@ -1,0 +1,75 @@
+.workout-detail {
+  padding-top: 0;
+}
+
+.back-icon {
+  width: 10px;
+  height: 19px;
+}
+
+.detail-header {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-header h1 {
+  margin: 0;
+  color: var(--color-text);
+  font: var(--font-heading-2);
+}
+
+.detail-header p {
+  margin: 0;
+  color: var(--color-muted);
+  font: var(--font-body-1);
+  font-weight: 400;
+}
+
+.set-card {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  background: var(--color-card);
+  display: grid;
+  gap: 16px;
+}
+
+.set-row {
+  display: grid;
+  grid-template-columns: minmax(88px, 1fr) 56px 24px 112px;
+  gap: 16px;
+  align-items: center;
+  color: var(--color-text);
+  font: var(--font-heading-4);
+  font-weight: 400;
+}
+
+.set-multiply {
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.complete-button {
+  margin-top: 24px;
+}
+
+@media (max-width: 360px) {
+  .workout-detail {
+    padding-top: 24px;
+  }
+
+  .detail-header {
+    margin-top: 54px;
+  }
+
+  .set-card {
+    padding: 26px 22px;
+  }
+
+  .set-row {
+    grid-template-columns: minmax(70px, 1fr) 52px 18px 98px;
+    gap: 10px;
+  }
+}

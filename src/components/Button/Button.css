@@ -1,0 +1,21 @@
+.button {
+  border: 0;
+  font: var(--font-heading-4);
+  cursor: pointer;
+}
+
+.button-primary {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 12px;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.button-text {
+  padding: 0;
+  background: transparent;
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+}

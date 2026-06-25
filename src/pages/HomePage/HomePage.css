@@ -1,0 +1,17 @@
+.week-selector {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.workout-list {
+  margin-top: 40px;
+  display: grid;
+  gap: 16px;
+}
+
+@media (max-width: 360px) {
+  .week-selector {
+    gap: 6px;
+  }
+}
