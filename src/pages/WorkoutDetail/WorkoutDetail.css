@@ -2,6 +2,10 @@
   padding-top: 0;
 }
 
+.back-button {
+  gap: 12px;
+}
+
 .back-icon {
   width: 10px;
   height: 19px;
