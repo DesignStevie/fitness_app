@@ -16,15 +16,13 @@ module.exports = async function handler(req, res) {
 
     if (req.method === 'PATCH') {
       const { dayIndex, workoutName, setData } = req.body
+      const cleanSetData = setData.map(({ reps, weight }) => ({ reps, weight }))
 
-      const schedule = await Schedule.findOne()
-      if (!schedule) return res.status(404).json({ error: 'Schedule not found' })
-
-      const workout = schedule.days[dayIndex]?.workouts.find(w => w.name === workoutName)
-      if (workout) {
-        workout.setData = setData
-        await schedule.save()
-      }
+      await Schedule.updateOne(
+        {},
+        { $set: { [`days.${dayIndex}.workouts.$[w].setData`]: cleanSetData } },
+        { arrayFilters: [{ 'w.name': workoutName }] }
+      )
 
       return res.json({ ok: true })
     }

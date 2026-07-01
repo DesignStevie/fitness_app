@@ -63,6 +63,17 @@ function App() {
 
   async function saveSets(setData) {
     await saveWorkoutSets(selectedIndex, selectedWorkout.name, setData)
+    setWeek(prev =>
+      prev.map((day, i) => {
+        if (i !== selectedIndex) return day
+        return {
+          ...day,
+          workouts: day.workouts.map(w =>
+            w.name === selectedWorkout.name ? { ...w, setData } : w
+          ),
+        }
+      })
+    )
   }
 
   if (loading) return null

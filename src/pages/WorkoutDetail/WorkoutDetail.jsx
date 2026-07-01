@@ -19,10 +19,6 @@ function WorkoutDetail({ workout, onBack, onSaveSets }) {
     )
   }
 
-  function handleBlur() {
-    onSaveSets(setData)
-  }
-
   async function handleBack() {
     await onSaveSets(setData)
     onBack()
@@ -54,7 +50,6 @@ function WorkoutDetail({ workout, onBack, onSaveSets }) {
               inputMode="numeric"
               value={set.reps}
               onChange={e => handleChange(index, 'reps', Number(e.target.value))}
-              onBlur={handleBlur}
               onFocus={e => e.target.select()}
             />
             <span className="set-multiply">x</span>
@@ -64,7 +59,6 @@ function WorkoutDetail({ workout, onBack, onSaveSets }) {
               unit="kg"
               value={set.weight}
               onChange={e => handleChange(index, 'weight', Number(e.target.value))}
-              onBlur={handleBlur}
               onFocus={e => e.target.select()}
             />
           </div>
