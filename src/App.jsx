@@ -29,6 +29,7 @@ function getTodayIndex() {
 function App() {
   const [week, setWeek] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(getTodayIndex)
   const [selectedWorkout, setSelectedWorkout] = useState(null)
   const [transitionDirection, setTransitionDirection] = useState('none')
@@ -39,7 +40,10 @@ function App() {
         setWeek(buildWeek(schedule))
         setLoading(false)
       })
-      .catch(() => setLoading(false))
+      .catch(err => {
+        setError(err.message)
+        setLoading(false)
+      })
   }, [])
 
   function selectDay(index) {
@@ -62,6 +66,15 @@ function App() {
   }
 
   if (loading) return null
+  if (error) return (
+    <main className="app-shell">
+      <section className="app-panel" aria-label="Workout app">
+        <p style={{ color: 'var(--color-muted)', padding: '24px 0' }}>
+          Failed to load: {error}
+        </p>
+      </section>
+    </main>
+  )
 
   return (
     <main className="app-shell">
