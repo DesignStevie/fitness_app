@@ -9,7 +9,7 @@ function WorkoutDetail({ workout, onBack, onSaveSets }) {
     Array.from({ length: workout.sets }, (_, i) => ({
       id: i + 1,
       reps: workout.setData?.[i]?.reps ?? workout.reps,
-      weight: workout.setData?.[i]?.weight ?? 20,
+      weight: workout.setData?.[i]?.weight ?? 0,
     }))
   )
 
