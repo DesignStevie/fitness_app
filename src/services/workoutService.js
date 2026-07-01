@@ -1,6 +1,9 @@
 export async function getSchedule() {
   const res = await fetch('/api/schedule')
-  if (!res.ok) throw new Error('Failed to load schedule')
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error || `API error ${res.status}`)
+  }
   return res.json()
 }
 
