@@ -23,13 +23,13 @@ function WorkoutDetail({ workout, onBack, onSaveSets }) {
     onSaveSets(setData)
   }
 
-  function handleBack() {
-    onSaveSets(setData)
+  async function handleBack() {
+    await onSaveSets(setData)
     onBack()
   }
 
-  function handleComplete() {
-    onSaveSets(setData)
+  async function handleComplete() {
+    await onSaveSets(setData)
     onBack()
   }
 

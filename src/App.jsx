@@ -1,11 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import HomePage from './pages/HomePage/HomePage'
 import WorkoutDetail from './pages/WorkoutDetail/WorkoutDetail'
 import { getSchedule, saveWorkoutSets } from './services/workoutService'
 import './App.css'
 
-function getCurrentWeek() {
-  const schedule = getSchedule()
+function buildWeek(schedule) {
   const today = new Date()
   const mondayOffset = (today.getDay() + 6) % 7
   const monday = new Date(today)
@@ -28,10 +27,20 @@ function getTodayIndex() {
 }
 
 function App() {
-  const week = useMemo(() => getCurrentWeek(), [])
+  const [week, setWeek] = useState([])
+  const [loading, setLoading] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState(getTodayIndex)
   const [selectedWorkout, setSelectedWorkout] = useState(null)
   const [transitionDirection, setTransitionDirection] = useState('none')
+
+  useEffect(() => {
+    getSchedule()
+      .then(schedule => {
+        setWeek(buildWeek(schedule))
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [])
 
   function selectDay(index) {
     setSelectedIndex(index)
@@ -48,9 +57,11 @@ function App() {
     setSelectedWorkout(null)
   }
 
-  function saveSets(setData) {
-    saveWorkoutSets(selectedIndex, selectedWorkout.name, setData)
+  async function saveSets(setData) {
+    await saveWorkoutSets(selectedIndex, selectedWorkout.name, setData)
   }
+
+  if (loading) return null
 
   return (
     <main className="app-shell">
