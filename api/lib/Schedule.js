@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const setDataSchema = new mongoose.Schema(
   { reps: Number, weight: Number },
@@ -23,4 +23,4 @@ const daySchema = new mongoose.Schema(
 
 const scheduleSchema = new mongoose.Schema({ days: [daySchema] })
 
-export default mongoose.models.Schedule ?? mongoose.model('Schedule', scheduleSchema)
+module.exports = mongoose.models.Schedule ?? mongoose.model('Schedule', scheduleSchema)

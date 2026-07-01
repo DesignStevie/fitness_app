@@ -1,8 +1,8 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 let cached = global._mongoose ?? (global._mongoose = { conn: null, promise: null })
 
-export async function connectToDatabase() {
+async function connectToDatabase() {
   if (cached.conn) return cached.conn
 
   if (!cached.promise) {
@@ -12,3 +12,5 @@ export async function connectToDatabase() {
   cached.conn = await cached.promise
   return cached.conn
 }
+
+module.exports = { connectToDatabase }

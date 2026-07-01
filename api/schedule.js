@@ -1,8 +1,8 @@
-import { connectToDatabase } from './lib/mongodb.js'
-import Schedule from './lib/Schedule.js'
-import { defaultPlans } from './lib/defaultPlans.js'
+const { connectToDatabase } = require('./lib/mongodb.js')
+const Schedule = require('./lib/Schedule.js')
+const { defaultPlans } = require('./lib/defaultPlans.js')
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     await connectToDatabase()
 

@@ -1,4 +1,4 @@
-export const defaultPlans = [
+const defaultPlans = [
   {
     day: 'Mon',
     workouts: [
@@ -59,3 +59,5 @@ export const defaultPlans = [
     ],
   },
 ]
+
+module.exports = { defaultPlans }
