@@ -1,27 +1,8 @@
-:root {
-  --color-bg: #141414;
-  --color-card: #1f1f1f;
-  --color-card-border: #2a2a2a;
-  --color-pill: #2f2f2f;
-  --color-pill-date: #565656;
-  --color-primary: #773cff;
-  --color-text: #f9f9f9;
-  --color-muted: #999999;
-  --font-app: Lato, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-heading-1: 700 32px/1.1 var(--font-app);
-  --font-heading-2: 700 24px/1.1 var(--font-app);
-  --font-heading-3: 700 20px/1.1 var(--font-app);
-  --font-heading-4: 700 16px/1.1 var(--font-app);
-  --font-body-1: 400 16px/1.25 var(--font-app);
-  --font-body-2: 400 14px/1.25 var(--font-app);
-  --font-body-3: 400 12px/1.25 var(--font-app);
-}
-
 .app-shell {
   min-height: 100svh;
   display: flex;
   justify-content: center;
-  background: #000;
+  background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-app);
 }
@@ -30,9 +11,18 @@
   width: 100%;
   max-width: 400px;
   min-height: 100svh;
-  padding: 24px 16px 40px;
+  padding:
+    calc(24px + env(safe-area-inset-top))
+    calc(16px + env(safe-area-inset-right))
+    calc(40px + env(safe-area-inset-bottom))
+    calc(16px + env(safe-area-inset-left));
   background: var(--color-bg);
   overflow-x: hidden;
+}
+
+.app-panel--home {
+  padding: 0;
+  background: var(--color-surface-light);
 }
 
 .page-transition {
@@ -83,7 +73,7 @@ button {
 }
 
 button:focus-visible {
-  outline: 3px solid rgba(177, 94, 255, 0.85);
+  outline: 2px solid var(--color-focus-ring);
   outline-offset: 4px;
 }
 

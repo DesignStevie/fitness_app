@@ -17,7 +17,7 @@ const workoutSchema = new mongoose.Schema(
 )
 
 const daySchema = new mongoose.Schema(
-  { day: String, workouts: [workoutSchema] },
+  { day: String, title: String, workouts: [workoutSchema] },
   { _id: false }
 )
 

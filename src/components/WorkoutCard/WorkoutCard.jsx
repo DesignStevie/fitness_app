@@ -1,4 +1,4 @@
-import ChevronRight from '../icons/ChevronRight/ChevronRight'
+import chevronForward from '../../assets/icons/chevron-forward.svg'
 import './WorkoutCard.css'
 
 function WorkoutCard({ workout, onSelect }) {
@@ -6,16 +6,16 @@ function WorkoutCard({ workout, onSelect }) {
     <button
       className="workout-card"
       type="button"
-      aria-label={`${workout.name} details`}
+      aria-label={`${workout.name}, ${workout.sets} sets of ${workout.reps} reps`}
       onClick={onSelect}
     >
-      <span>
-        <strong>{workout.name}</strong>
-        <small>
-          {workout.sets} Sets&nbsp; &bull;&nbsp; {workout.reps} Reps&nbsp; &bull;&nbsp; {workout.group}
+      <span className="workout-card__text">
+        <strong className="workout-card__title">{workout.name}</strong>
+        <small className="workout-card__meta">
+          {workout.sets} sets &bull; {workout.reps} Reps
         </small>
       </span>
-      <ChevronRight className="card-arrow" />
+      <img className="workout-card__chevron" src={chevronForward} width="24" height="24" alt="" />
     </button>
   )
 }

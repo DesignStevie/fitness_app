@@ -1,0 +1,68 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stepper__button {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-control);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 120ms ease, opacity 160ms ease;
+}
+
+.stepper__button img {
+  display: block;
+}
+
+.stepper__button:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.stepper__button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.stepper__value {
+  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  cursor: text;
+}
+
+.stepper__input {
+  min-width: 1ch;
+  max-width: 5ch;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font: var(--font-numeral-xl);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  caret-color: var(--color-primary);
+}
+
+.stepper__input:focus {
+  outline: none;
+  background: rgb(255 255 255 / 0.06);
+}
+
+.stepper__unit {
+  padding-bottom: 6px;
+  color: var(--color-muted);
+  font: var(--font-body-1-strong);
+}

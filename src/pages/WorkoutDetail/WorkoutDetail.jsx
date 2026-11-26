@@ -1,72 +1,104 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import arrowBack from '../../assets/icons/arrow-back.svg'
+import divider from '../../assets/icons/divider.svg'
 import Button from '../../components/Button/Button'
-import ChevronLeft from '../../components/icons/ChevronLeft/ChevronLeft'
-import Input from '../../components/Input/Input'
+import Stepper from '../../components/Stepper/Stepper'
 import './WorkoutDetail.css'
 
-function WorkoutDetail({ workout, onBack, onSaveSets }) {
-  const [setData, setSetData] = useState(() =>
+const WEIGHT_STEP_KG = 2.5
+
+function WorkoutDetail({ workout, dayTitle, position, total, onBack, onSaveSets }) {
+  const [sets, setSets] = useState(() =>
     Array.from({ length: workout.sets }, (_, i) => ({
-      id: i + 1,
       reps: workout.setData?.[i]?.reps ?? workout.reps,
       weight: workout.setData?.[i]?.weight ?? 0,
     }))
   )
+  const [activeSet, setActiveSet] = useState(0)
+  const [saving, setSaving] = useState(false)
 
-  function handleChange(index, field, value) {
-    setSetData(prev =>
-      prev.map((s, i) => (i === index ? { ...s, [field]: value } : s))
+  // Track unsaved edits so switching day mid-edit still persists them.
+  const dirty = useRef(false)
+  const latest = useRef({ sets, onSaveSets })
+  latest.current = { sets, onSaveSets }
+
+  useEffect(() => () => {
+    if (dirty.current) latest.current.onSaveSets(latest.current.sets)
+  }, [])
+
+  function updateSet(field, value) {
+    dirty.current = true
+    setSets(prev =>
+      prev.map((s, i) => {
+        if (i !== activeSet) return s
+        const next = typeof value === 'function' ? value(s[field]) : value
+        return { ...s, [field]: next }
+      })
     )
   }
 
-  async function handleBack() {
-    await onSaveSets(setData)
+  async function exit() {
+    if (dirty.current) {
+      setSaving(true)
+      dirty.current = false
+      await onSaveSets(sets)
+    }
     onBack()
   }
 
-  async function handleComplete() {
-    await onSaveSets(setData)
-    onBack()
-  }
+  const current = sets[activeSet]
 
   return (
     <article className="workout-detail">
-      <Button className="back-button" variant="text" onClick={handleBack}>
-        <ChevronLeft className="back-icon" />
-        Back
-      </Button>
-
-      <header className="detail-header">
-        <h1>{workout.name}</h1>
-        <p>{workout.group}</p>
-      </header>
-
-      <div className="set-card" aria-label={`${workout.name} sets`}>
-        {setData.map((set, index) => (
-          <div className="set-row" key={set.id}>
-            <span>Set {set.id}</span>
-            <Input
-              aria-label={`Set ${set.id} reps`}
-              inputMode="numeric"
-              value={set.reps}
-              onChange={e => handleChange(index, 'reps', Number(e.target.value))}
-              onFocus={e => e.target.select()}
-            />
-            <span className="set-multiply">x</span>
-            <Input
-              aria-label={`Set ${set.id} weight`}
-              inputMode="decimal"
-              unit="kg"
-              value={set.weight}
-              onChange={e => handleChange(index, 'weight', Number(e.target.value))}
-              onFocus={e => e.target.select()}
-            />
+      <div className="workout-detail__body">
+        <header className="workout-detail__header">
+          <button className="workout-detail__back" type="button" aria-label="Back to exercises" onClick={exit}>
+            <img src={arrowBack} width="20" height="20" alt="" />
+          </button>
+          <div className="workout-detail__heading">
+            <p className="workout-detail__eyebrow">
+              {dayTitle} • {position} of {total}
+            </p>
+            <h2 className="workout-detail__name">{workout.name}</h2>
           </div>
-        ))}
+        </header>
+
+        <div className="set-tabs" role="tablist" aria-label="Sets">
+          {sets.map((_, i) => (
+            <button
+              key={i}
+              className={`set-tab${i === activeSet ? ' is-active' : ''}`}
+              type="button"
+              role="tab"
+              aria-selected={i === activeSet}
+              onClick={() => setActiveSet(i)}
+            >
+              Set {i + 1}
+            </button>
+          ))}
+        </div>
+
+        <div className="set-editor" role="tabpanel" aria-label={`Set ${activeSet + 1}`}>
+          <Stepper
+            label="Weight"
+            unit="KG"
+            decimal
+            step={WEIGHT_STEP_KG}
+            value={current.weight}
+            onChange={v => updateSet('weight', v)}
+          />
+          <img className="set-editor__divider" src={divider} width="334" height="1" alt="" />
+          <Stepper
+            label="Reps"
+            unit="REPS"
+            value={current.reps}
+            onChange={v => updateSet('reps', v)}
+          />
+        </div>
       </div>
 
-      <Button className="complete-button" onClick={handleComplete}>
-        Mark as complete
+      <Button className="workout-detail__finish" onClick={exit} disabled={saving}>
+        Finished
       </Button>
     </article>
   )

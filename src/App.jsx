@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import HomePage from './pages/HomePage/HomePage'
-import WorkoutDetail from './pages/WorkoutDetail/WorkoutDetail'
 import { getSchedule, saveWorkoutSets } from './services/workoutService'
 import './App.css'
 
@@ -47,6 +46,7 @@ function App() {
   }, [])
 
   function selectDay(index) {
+    setTransitionDirection('none')
     setSelectedIndex(index)
     setSelectedWorkout(null)
   }
@@ -61,19 +61,21 @@ function App() {
     setSelectedWorkout(null)
   }
 
-  async function saveSets(setData) {
-    await saveWorkoutSets(selectedIndex, selectedWorkout.name, setData)
+  // dayIndex/workoutName are passed explicitly so a save fired after the
+  // user has already switched day still lands on the right workout.
+  async function saveSets(dayIndex, workoutName, setData) {
     setWeek(prev =>
       prev.map((day, i) => {
-        if (i !== selectedIndex) return day
+        if (i !== dayIndex) return day
         return {
           ...day,
           workouts: day.workouts.map(w =>
-            w.name === selectedWorkout.name ? { ...w, setData } : w
+            w.name === workoutName ? { ...w, setData } : w
           ),
         }
       })
     )
+    await saveWorkoutSets(dayIndex, workoutName, setData)
   }
 
   if (loading) return null
@@ -89,21 +91,17 @@ function App() {
 
   return (
     <main className="app-shell">
-      <section className="app-panel" aria-label="Workout app">
-        {selectedWorkout ? (
-          <div className={`page-transition page-transition-${transitionDirection}`}>
-            <WorkoutDetail workout={selectedWorkout} onBack={goBack} onSaveSets={saveSets} />
-          </div>
-        ) : (
-          <div className={`page-transition page-transition-${transitionDirection}`}>
-            <HomePage
-              week={week}
-              selectedIndex={selectedIndex}
-              onSelectDay={selectDay}
-              onSelectWorkout={selectWorkout}
-            />
-          </div>
-        )}
+      <section className="app-panel app-panel--home" aria-label="Workout app">
+        <HomePage
+          week={week}
+          selectedIndex={selectedIndex}
+          selectedWorkout={selectedWorkout}
+          transitionDirection={transitionDirection}
+          onSelectDay={selectDay}
+          onSelectWorkout={selectWorkout}
+          onBack={goBack}
+          onSaveSets={saveSets}
+        />
       </section>
     </main>
   )

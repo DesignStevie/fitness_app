@@ -1,0 +1,86 @@
+/*
+ * Design tokens
+ * Source: Figma "Playground" › Home (4926:7554), Workout (5220:3756)
+ *
+ * Layer 1 – palette: raw values, never used directly in components.
+ * Layer 2 – semantic: what components consume.
+ */
+
+:root {
+  /* ---------- Palette ---------- */
+  --palette-neutral-50: #eeeff1;
+  --palette-neutral-400: #9aa0aa;
+  --palette-neutral-600: #5a5f68;
+  --palette-neutral-700: #494f58;
+  --palette-neutral-800: #2d3239;
+  --palette-neutral-900: #1e2228;
+  --palette-neutral-950: #0b0b0d;
+  --palette-neutral-25: #f7f7f7;
+  --palette-orange-500: #ff4103;
+
+  /* ---------- Semantic colour ---------- */
+  /* Light surfaces (page header area) */
+  --color-surface-light: var(--palette-neutral-50);
+  --color-text-on-light: var(--palette-neutral-900);
+  --color-text-on-light-strong: var(--palette-neutral-950);
+  --color-text-on-light-muted: var(--palette-neutral-600);
+  --color-text-on-light-subtle: var(--palette-neutral-400);
+
+  /* Dark surfaces (sheet, cards, detail screen) */
+  --color-bg: var(--palette-neutral-900);
+  --color-card: var(--palette-neutral-800);
+  --color-card-border: var(--palette-neutral-800);
+  --color-text: var(--palette-neutral-50);
+  --color-muted: var(--palette-neutral-400);
+  --color-icon-muted: var(--palette-neutral-600);
+  --color-control: var(--palette-neutral-700);
+  --color-divider: var(--palette-neutral-700);
+
+  /* Interactive */
+  --color-selected-bg: var(--palette-neutral-900);
+  --color-selected-text: var(--palette-neutral-50);
+  --color-primary: var(--palette-orange-500);
+  --color-on-primary: var(--palette-neutral-25);
+  --color-focus-ring: var(--palette-orange-500);
+
+  /* ---------- Font families ---------- */
+  --font-family-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-family-heading: Barlow, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-family-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-app: var(--font-family-body);
+
+  /* ---------- Type scale ---------- */
+  --font-display-1: 800 100px/1 var(--font-family-display);
+
+  --font-heading-1: 700 32px/1.1 var(--font-family-heading);
+  --font-heading-2: 700 24px/1.1 var(--font-family-heading);
+  --font-heading-3: 700 20px/1.1 var(--font-family-heading);
+  --font-heading-4: 700 16px/1.2 var(--font-family-heading);
+  --font-label-xs: 700 10px/1.2 var(--font-family-heading);
+  --font-eyebrow: 700 12px/1.2 var(--font-family-display);
+  --font-numeral-xl: 700 64px/64px var(--font-family-heading);
+  --font-button: 700 16px/18px var(--font-family-heading);
+
+  --font-body-1: 400 16px/1.25 var(--font-family-body);
+  --font-body-2: 400 14px/1.25 var(--font-family-body);
+  --font-body-3: 400 12px/1.2 var(--font-family-body);
+  --font-body-1-strong: 700 16px/1.2 var(--font-family-body);
+  --font-body-3-strong: 600 12px/1.2 var(--font-family-body);
+  --font-caption-strong: 600 10px/1.2 var(--font-family-body);
+  --font-numeral-lg: 700 20px/16px var(--font-family-body);
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* ---------- Elevation ---------- */
+  --shadow-raised:
+    0 0 0 1px rgb(30 34 40 / 0.05),
+    0 2px 2px rgb(30 34 40 / 0.04),
+    0 4px 4px rgb(30 34 40 / 0.04),
+    0 8px 8px rgb(30 34 40 / 0.04),
+    0 16px 16px rgb(30 34 40 / 0.04);
+  --shadow-inner-highlight: inset 0 1px 1px rgb(255 255 255 / 0.05);
+}

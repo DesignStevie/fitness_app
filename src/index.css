@@ -3,13 +3,16 @@
 }
 
 html {
-  background: #000;
+  background: var(--color-bg);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   min-width: 320px;
   margin: 0;
-  background: #000;
+  background: var(--color-bg);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
 }
 
 #root {

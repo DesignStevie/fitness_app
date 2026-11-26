@@ -1,14 +1,7 @@
 const defaultPlans = [
   {
     day: 'Mon',
-    workouts: [
-      { name: 'Bench press', sets: 4, reps: 8, group: 'Upper body' },
-      { name: 'Incline dumbbell press', sets: 3, reps: 10, group: 'Upper body' },
-      { name: 'Triceps pushdown', sets: 3, reps: 12, group: 'Arms' },
-    ],
-  },
-  {
-    day: 'Tue',
+    title: 'Push',
     workouts: [
       { name: 'Barbell bench press', sets: 4, reps: 5, group: 'Chest' },
       { name: 'Incline dumbbell press', sets: 3, reps: 8, group: 'Chest' },
@@ -18,19 +11,10 @@ const defaultPlans = [
       { name: 'Overhead cable tricep extension', sets: 2, reps: 10, group: 'Arms' },
     ],
   },
+  { day: 'Tue', title: 'Rest', workouts: [] },
   {
     day: 'Wed',
-    workouts: [
-      { name: 'Deadlift or barbell row', sets: 4, reps: 5, group: 'Back' },
-      { name: 'Pull-ups or lat pulldown', sets: 3, reps: 6, group: 'Back' },
-      { name: 'Seated cable row', sets: 3, reps: 8, group: 'Back' },
-      { name: 'Rear delt fly', sets: 3, reps: 12, group: 'Shoulders' },
-      { name: 'Barbell or EZ-bar curl', sets: 3, reps: 8, group: 'Arms' },
-      { name: 'Hammer curl', sets: 2, reps: 10, group: 'Arms' },
-    ],
-  },
-  {
-    day: 'Thu',
+    title: 'Legs',
     workouts: [
       { name: 'Back squat', sets: 4, reps: 5, group: 'Lower body' },
       { name: 'Romanian deadlift', sets: 3, reps: 8, group: 'Lower body' },
@@ -40,29 +24,21 @@ const defaultPlans = [
       { name: 'Standing calf raise', sets: 3, reps: 12, group: 'Lower body' },
     ],
   },
+  { day: 'Thu', title: 'Rest', workouts: [] },
   {
     day: 'Fri',
+    title: 'Pull',
     workouts: [
-      { name: 'Hip thrust', sets: 4, reps: 10, group: 'Lower body' },
-      { name: 'Leg press', sets: 4, reps: 10, group: 'Lower body' },
-      { name: 'Hamstring curl', sets: 3, reps: 12, group: 'Lower body' },
+      { name: 'Deadlift or barbell row', sets: 4, reps: 5, group: 'Back' },
+      { name: 'Pull-ups or lat pulldown', sets: 3, reps: 6, group: 'Back' },
+      { name: 'Seated cable row', sets: 3, reps: 8, group: 'Back' },
+      { name: 'Rear delt fly', sets: 3, reps: 12, group: 'Shoulders' },
+      { name: 'Barbell or EZ-bar curl', sets: 3, reps: 8, group: 'Arms' },
+      { name: 'Hammer curl', sets: 2, reps: 10, group: 'Arms' },
     ],
   },
-  {
-    day: 'Sat',
-    workouts: [
-      { name: 'Bike intervals', sets: 6, reps: 1, group: 'Conditioning' },
-      { name: 'Plank', sets: 3, reps: 45, group: 'Core' },
-      { name: 'Hanging knee raise', sets: 3, reps: 12, group: 'Core' },
-    ],
-  },
-  {
-    day: 'Sun',
-    workouts: [
-      { name: 'Mobility flow', sets: 1, reps: 20, group: 'Recovery' },
-      { name: 'Zone 2 walk', sets: 1, reps: 30, group: 'Cardio' },
-    ],
-  },
+  { day: 'Sat', title: 'Rest', workouts: [] },
+  { day: 'Sun', title: 'Rest', workouts: [] },
 ]
 
 module.exports = { defaultPlans }

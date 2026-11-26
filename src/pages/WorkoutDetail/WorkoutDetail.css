@@ -1,79 +1,104 @@
 .workout-detail {
-  padding-top: 0;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
 }
 
-.back-button {
-  gap: 12px;
+.workout-detail__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.back-icon {
-  width: 10px;
-  height: 19px;
+.workout-detail__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.detail-header {
-  margin-top: 24px;
+.workout-detail__back {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--color-card);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.workout-detail__back img {
+  display: block;
+}
+
+.workout-detail__back:active {
+  background: var(--color-card);
+}
+
+.workout-detail__heading {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.detail-header h1 {
-  margin: 0;
-  color: var(--color-text);
-  font: var(--font-heading-2);
-}
-
-.detail-header p {
+.workout-detail__eyebrow {
   margin: 0;
   color: var(--color-muted);
-  font: var(--font-body-1);
-  font-weight: 400;
+  font: var(--font-eyebrow);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.set-card {
-  margin-top: 16px;
-  padding: 16px;
-  border-radius: 20px;
+.workout-detail__name {
+  margin: 0;
+  color: var(--color-text);
+  font: var(--font-body-1-strong);
+}
+
+.set-tabs {
+  display: flex;
+  gap: 16px;
+}
+
+.set-tab {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 14px 6px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
   background: var(--color-card);
-  display: grid;
-  gap: 16px;
-}
-
-.set-row {
-  display: grid;
-  grid-template-columns: minmax(88px, 1fr) 56px 24px 112px;
-  gap: 16px;
-  align-items: center;
   color: var(--color-text);
   font: var(--font-heading-4);
-  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 160ms ease;
 }
 
-.set-multiply {
-  color: var(--color-muted);
-  text-align: center;
+.set-tab.is-active {
+  border-color: var(--color-primary);
 }
 
-.complete-button {
-  margin-top: 24px;
+.set-editor {
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-card);
+  box-shadow: var(--shadow-inner-highlight);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-@media (max-width: 360px) {
-  .workout-detail {
-    padding-top: 24px;
-  }
+.set-editor__divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+}
 
-  .detail-header {
-    margin-top: 54px;
-  }
-
-  .set-card {
-    padding: 26px 22px;
-  }
-
-  .set-row {
-    grid-template-columns: minmax(70px, 1fr) 52px 18px 98px;
-    gap: 10px;
-  }
+.workout-detail__finish {
+  flex: 0 0 auto;
 }
